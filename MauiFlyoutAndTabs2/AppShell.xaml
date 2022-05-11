@@ -4,11 +4,70 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiFlyoutAndTabs2"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem Title="Simple page">
+        <Tab>
+            <ShellContent
+                Title="Page 1"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <!--
+        MAUI Android: bottom tabs, bug: only the selected tab is visible, the other one is transparent
+        MAUI Windows: top tabs
+        Xamarin.Forms Android and Windows: bottom tabs
+    -->
+    <FlyoutItem Title="ShellContents directly inside FlyoutItem">
+        <ShellContent
+                Title="Page 1"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage2" />
+        <ShellContent
+                Title="Page 2"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage3" />
+    </FlyoutItem>
+
+    <!--
+        MAUI Android: top tabs, bug: the selected tab is not highlighted (both tabs has the same color)
+        MAUI Windows: a drop-down menu instead of top tabs; bug : sometimes the selected item is not
+                      highlighted in the drop-down menu (no blue line on the left)
+        Xamarin.Forms Android and Windows: top tabs
+    -->
+    <FlyoutItem Title="ShellContents inside a single Tab">
+        <Tab Title="Tab 1">
+            <ShellContent
+                Title="Page 1"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage4" />
+            <ShellContent
+                Title="Page 2"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage5" />
+        </Tab>
+    </FlyoutItem>
+
+    <!--
+        MAUI Android: top tabs, bug: the selected tab is not highlighted
+        MAUI Windows: top tabs
+        Xamarin.Forms Android and Windows: bottom tabs
+    -->
+    <FlyoutItem Title="ShellContents inside separate Tabs">
+        <Tab Title="Tab 1">
+            <ShellContent
+                Title="Page 1"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage2" />
+        </Tab>
+        <Tab Title="Tab 2">
+            <ShellContent
+                Title="Page 2"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage3" />
+        </Tab>
+    </FlyoutItem>
 
 </Shell>
